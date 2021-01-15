@@ -1,1 +1,14 @@
+com\bigshaneym\mcrealestate\housing\HousingTypes.class
+com\bigshaneym\mcrealestate\world\House.class
+com\bigshaneym\mcrealestate\housing\HouseEditStages.class
+com\bigshaneym\mcrealestate\housing\listeners\HouseEditorChatListener.class
+com\bigshaneym\mcrealestate\commands\HouseCommand.class
+com\bigshaneym\mcrealestate\housing\HouseEditor$1.class
+com\bigshaneym\mcrealestate\housing\listeners\HouseEditorLeaveServerListener.class
+com\bigshaneym\mcrealestate\housing\listeners\HouseEditorSignPlaceEvent.class
 com\bigshaneym\mcrealestate\Core.class
+com\bigshaneym\mcrealestate\housing\listeners\HouseEditorChatListener$1.class
+com\bigshaneym\mcrealestate\io\FileManager.class
+com\bigshaneym\mcrealestate\world\WorldAABB.class
+com\bigshaneym\mcrealestate\Utilities.class
+com\bigshaneym\mcrealestate\housing\HouseEditor.class
