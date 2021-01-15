@@ -28,17 +28,19 @@ public class HouseEditor {
     private HousingTypes houseType = HousingTypes.NULL_TYPE;
     private int buy_price, sell_price;
     private int chestNum;
+    private double price_val_decay;
 
 
 
     public boolean buy_sign_placed, sell_sign_placed;
 
     public HouseEditor() {
-        this(HouseEditStages.START);
+        this(HouseEditStages.START, 0.5);
     }
 
-    public HouseEditor(HouseEditStages stage) {
+    public HouseEditor(HouseEditStages stage, double price_value_decay) {
         this.stage = stage;
+        this.price_val_decay = price_value_decay;
         createMap();
     }
 
@@ -69,7 +71,7 @@ public class HouseEditor {
 
     public static void addPlayerEditor(Player player, HouseEditStages stage) {
      if (!isEditing(player.getName()))
-         editors_map.put(player.getName(), new HouseEditor(stage));
+         editors_map.put(player.getName(), new HouseEditor(stage, 0.5));
     }
 
     private void addChatLineGap(Player player) {
@@ -233,14 +235,26 @@ public class HouseEditor {
                     }
                 }
                 break;
-            case SET_BUY_SIGNS:
+            case SET_HOUSE_PRICE:
                 if (buy_price == 0 && message.equals("READY")) {
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&cInvalid buy price number! Please enter a valid integer!"));
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are finished with a buying price, please type '&cREADY&r'"));
                 } else if (message.equals("READY")) {
-                    stage = HouseEditStages.SET_SELL_SIGNS;
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rNow please enter a number for the price of the house to sell. This # should be at least 25% smaller than the buy price!"));
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are finished with a selling price, please type '&cREADY&r'"));
+                    stage = HouseEditStages.PLACE_DOOR_SIGNS;
+                    player.getInventory().clear();
+                    ItemStack buy_sign = new ItemStack(Material.OAK_WALL_SIGN);
+                    ItemStack sell_sign = new ItemStack(Material.OAK_WALL_SIGN);
+                    ItemMeta b_sign_meta = buy_sign.getItemMeta();
+                    ItemMeta s_sign_meta = sell_sign.getItemMeta();
+                    b_sign_meta.setDisplayName(Utilities.toColor("&c" + house_name + " Buy Sign"));
+                    s_sign_meta.setDisplayName(Utilities.toColor("&c" + house_name + " Sell Sign"));
+                    buy_sign.setItemMeta(b_sign_meta);
+                    sell_sign.setItemMeta(s_sign_meta);
+                    player.getInventory().addItem(new ItemStack[]{buy_sign, sell_sign});
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rNow go out to the front of the house where the door is placed. " +
+                            "Find two blocks on opposite sides of the door to place these signs."));
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rThe left side of the door will have the buy sign, the sell sign will be on the right."));
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are done with the two sign placements, type '&cREADY&r'"));
                 } else {
                     try {
                         buy_price = Integer.valueOf(message);
@@ -250,43 +264,15 @@ public class HouseEditor {
                         return;
                     }
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rYou have chosen the buying price of this house to be $" + buy_price));
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rThis makes the selling price to be $" + (int)(buy_price * price_val_decay)));
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rIf this is wrong, please enter another valid integer!"));
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are finished with a buying price, please type '&cREADY&r'"));
                 }
                 break;
-            case SET_SELL_SIGNS:
-                if (sell_price == 0 && message.equals("READY")) {
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&cInvalid sell price number! Please enter a valid integer!"));
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are finished with a selling price, please type '&cREADY&r'"));
-                } else if (message.equals("READY")) {
-                    stage = HouseEditStages.PLACE_DOOR_SIGNS;
-                    player.getInventory().clear();
-//                    ItemStack buy_sign = new ItemStack(Material.OAK_WALL_SIGN);
-//                    ItemStack sell_sign = new ItemStack(Material.OAK_WALL_SIGN);
-//                    ItemMeta b_sign_meta = buy_sign.getItemMeta();
-//                    ItemMeta s_sign_meta = sell_sign.getItemMeta();
-//                    b_sign_meta.setDisplayName(Utilities.toColor("&c" + house_name + " Buy Sign"));
-//                    s_sign_meta.setDisplayName(Utilities.toColor("&c" + house_name + " Sell Sign"));
-//                    buy_sign.setItemMeta(b_sign_meta);
-//                    sell_sign.setItemMeta(s_sign_meta);
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rNow go out to the front of the house where the door is placed. Find two blocks on opposite sides of the door to place these signs."));
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rThe left side of the door will have the buy sign, the sell sign will be on the right."));
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are done with the two sign placements, type '&cREADY&r'"));
-                } else {
-                    try {
-                        sell_price = Integer.valueOf(message);
-                    } catch (NumberFormatException e) {
-                        player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&cInvalid sell price number! Please enter a valid integer!"));
-                        player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are finished with a selling price, please type '&cREADY&r'"));
-                        return;
-                    }
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rYou have chosen the selling price of this house to be $" + sell_price));
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rIf this is wrong, please enter another valid integer!"));
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are finished with a selling price, please type '&cREADY&r'"));
-                }
-                break;
             case PLACE_DOOR_SIGNS:
+                break;
             case CHOOSE_TP_LOCATION:
+                break;
             default:
                 break;
         }

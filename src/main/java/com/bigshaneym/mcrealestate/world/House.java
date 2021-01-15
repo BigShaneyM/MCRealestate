@@ -1,5 +1,6 @@
 package com.bigshaneym.mcrealestate.world;
 
+import com.bigshaneym.mcrealestate.housing.HousingTypes;
 import org.bukkit.Location;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public class House {
     private String ownerUUID;
     private List<String> guestUUIDs;
     private int chest_storage_amount;
+    private HousingTypes type = HousingTypes.NULL_TYPE;
 
 
 
