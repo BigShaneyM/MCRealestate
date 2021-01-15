@@ -81,13 +81,18 @@ public class HouseEditor {
         addChatLineGap(player);
         addChatLineGap(player);
         if (stage == HouseEditStages.START) {
-            player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWelcome to the Housing Editor. To start, stand on a block at the lowest corner of the house."));
-            player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are in position, please type in chat: '&cREADY&r'"));
+            player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWelcome to the Housing Editor. To start, left click a block at the lowest corner of the house using the stick."));
+            player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you have the position, please type in chat: '&cREADY&r'"));
             player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rIf you need to exit the house editor, please type '&cEXIT&r'"));
-            stage = HouseEditStages.CHOOSE_FIRST_COORDS;
+            stage = HouseEditStages.CHOOSE_HOUSE_BOUNDS;
             player.setGameMode(GameMode.CREATIVE);
             player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 1000000, 10));
             player.getInventory().clear();
+            ItemStack is = new ItemStack(Material.DEBUG_STICK);
+            ItemMeta is_im = is.getItemMeta();
+            is_im.setDisplayName(Utilities.toColor("&cHouse Location Recorder"));
+            is.setItemMeta(is_im);
+            player.getInventory().addItem(is);
             return;
         }
 
@@ -99,16 +104,20 @@ public class HouseEditor {
         }
 
         switch (stage) {
-            case CHOOSE_FIRST_COORDS:
+            case CHOOSE_HOUSE_BOUNDS:
+                break;
+            /**case CHOOSE_FIRST_COORDS:
                 if (message.equals("READY")) {
                     this.l0 = player.getLocation();
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rFirst location recorded!"));
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rNow, choose the next highest corner opposite to the first corner in a diagonal."));
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are in position, please type in chat: '&cREADY&r'"));
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rNow, choose the next highest corner opposite to the first corner in a diagonal. " +
+                            "Right click the block with the stick."));
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are have the position, please type in chat: '&cREADY&r'"));
                     stage = HouseEditStages.CHOOSE_SECOND_COORDS;
                 } else {
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWelcome to the Housing Editor. To start, stand on a block at the lowest corner of the house."));
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are in position, please type in chat: '&cREADY&r'"));
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWelcome to the Housing Editor. To start, left click a block at the lowest corner of the house using the stick."));
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you have the position, please type in chat: '&cREADY&r'"));
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rIf you need to exit the house editor, please type '&cEXIT&r'"));
                 }
                 break;
             case CHOOSE_SECOND_COORDS:
@@ -117,11 +126,13 @@ public class HouseEditor {
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rSecond location recorded!"));
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rNow to create a name for this 'house' boundary. Please type in a name, only one word!"));
                     stage = HouseEditStages.SET_HOUSE_NAME;
+                    player.getInventory().clear();
                 } else {
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rChoose the next highest corner opposite to the first corner in a diagonal."));
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are in position, please type in chat: '&cREADY&r'"));
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rChoose the next highest corner opposite to the first corner in a diagonal." +
+                            "Right click the block with the stick."));
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are have the position, please type in chat: '&cREADY&r'"));
                 }
-                break;
+                break;*/
             case SET_HOUSE_NAME:
                 if (house_name == null && message.equals("READY")) {
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rCreate a name for this 'house' boundary. Please type in a name, only one word!"));
@@ -266,6 +277,18 @@ public class HouseEditor {
         }
         types = types.substring(0, types.length() - 3);
         return types;
+    }
+
+    public HouseEditStages getEditorStage() {
+        return stage;
+    }
+
+    public void setLocationOne(Location loc) {
+        this.l0 = loc;
+    }
+
+    public void setLocationTwo(Location loc) {
+        this.l = loc;
     }
 
 
