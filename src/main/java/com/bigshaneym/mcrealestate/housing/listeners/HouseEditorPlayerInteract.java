@@ -22,22 +22,30 @@ public class HouseEditorPlayerInteract implements Listener {
         if (HouseEditor.isEditing(player.getName())) {
             HouseEditor editor = HouseEditor.getHouseEditor(player.getName());
             if (editor.getEditorStage() == HouseEditStages.CHOOSE_HOUSE_BOUNDS) {
-                if (event.getItem() == null || event.getItem().getType() != Material.DEBUG_STICK)
+                if (event.getItem() == null || event.getItem().getType() != Material.STICK)
                     return;
                 Location location = event.getClickedBlock().getLocation();
+                player.sendMessage("");
+                player.sendMessage("");
+                player.sendMessage("");
                 switch (a) {
                     case LEFT_CLICK_BLOCK:
                         editor.setLocationOne(location);
-                        player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rFirst location set at " + location.toString() + "!"));
+                        player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rFirst location set at " + getLocationString(location) + "!"));
                         player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen both locations are set, type '&cREADY&r'"));
                         break;
                     case RIGHT_CLICK_BLOCK:
                         editor.setLocationTwo(location);
-                        player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rSecond location set at " + location.toString() + "!"));
+                        player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rSecond location set at " + getLocationString(location) + "!"));
                         player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen both locations are set, type '&cREADY&r'"));
                         break;
                 }
+                event.setCancelled(true);
             }
         }
+    }
+
+    private String getLocationString(Location l) {
+        return "X:" + l.getBlockX() + " Y:" + l.getBlockY() + " Z:" + l.getBlockZ();
     }
 }

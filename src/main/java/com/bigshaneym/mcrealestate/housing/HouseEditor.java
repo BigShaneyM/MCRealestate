@@ -1,9 +1,13 @@
 package com.bigshaneym.mcrealestate.housing;
 
 import com.bigshaneym.mcrealestate.Utilities;
+import com.bigshaneym.mcrealestate.world.House;
+import com.bigshaneym.mcrealestate.world.WorldAABB;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -19,9 +23,11 @@ public class HouseEditor {
 
     private Location l0 = null;
     private Location l = null;
+    private WorldAABB houseAABB;
     private String house_name;
     private HousingTypes houseType = HousingTypes.NULL_TYPE;
     private int buy_price, sell_price;
+    private int chestNum;
 
 
 
@@ -90,7 +96,7 @@ public class HouseEditor {
             player.setGameMode(GameMode.CREATIVE);
             player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 1000000, 10));
             player.getInventory().clear();
-            ItemStack is = new ItemStack(Material.DEBUG_STICK);
+            ItemStack is = new ItemStack(Material.STICK);
             ItemMeta is_im = is.getItemMeta();
             is_im.setDisplayName(Utilities.toColor("&cHouse Location Recorder"));
             is.setItemMeta(is_im);
@@ -112,6 +118,7 @@ public class HouseEditor {
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rNow to create a name for this 'house' boundary. Please type in a name, only one word!"));
                     stage = HouseEditStages.SET_HOUSE_NAME;
                     player.getInventory().clear();
+                    houseAABB = House.getAABBFromLocations(l0, l);
                 } else {
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWelcome to the Housing Editor. To start, left click the block at the lowest corner of the house using the stick."));
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you have the position, please type in chat: '&cREADY&r'"));
@@ -172,6 +179,8 @@ public class HouseEditor {
                 break;
             case CHEST_PLACEMENT:
                 if (message.equals("READY")) {
+                    genChestNumber();
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rThere are " + this.chestNum + " available chests for this house."));
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&r Now to place the doors of the house. Choose locations where doors will be " +
                             "placed and place the iron door facing outward."));
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are done with door placement, please type in '&cREADY&r'"));
@@ -252,17 +261,17 @@ public class HouseEditor {
                 } else if (message.equals("READY")) {
                     stage = HouseEditStages.PLACE_DOOR_SIGNS;
                     player.getInventory().clear();
-                    ItemStack buy_sign = new ItemStack(Material.OAK_WALL_SIGN);
-                    ItemStack sell_sign = new ItemStack(Material.OAK_WALL_SIGN);
-                    ItemMeta b_sign_meta = buy_sign.getItemMeta();
-                    ItemMeta s_sign_meta = sell_sign.getItemMeta();
-                    b_sign_meta.setDisplayName(Utilities.toColor("&c" + house_name + " Buy Sign"));
-                    s_sign_meta.setDisplayName(Utilities.toColor("&c" + house_name + " Sell Sign"));
-                    buy_sign.setItemMeta(b_sign_meta);
-                    sell_sign.setItemMeta(s_sign_meta);
-                    player.sendMessage("&2[MCRealEstate]:&rNow go out to the front of the house where the door is placed. Find two blocks on opposite sides of the door to place these signs.");
-                    player.sendMessage("&2[MCRealEstate]:&rThe left side of the door will have the buy sign, the sell sign will be on the right.");
-                    player.sendMessage("&2[MCRealEstate]:&rWhen you are done with the two sign placements, type '&cREADY&r'");
+//                    ItemStack buy_sign = new ItemStack(Material.OAK_WALL_SIGN);
+//                    ItemStack sell_sign = new ItemStack(Material.OAK_WALL_SIGN);
+//                    ItemMeta b_sign_meta = buy_sign.getItemMeta();
+//                    ItemMeta s_sign_meta = sell_sign.getItemMeta();
+//                    b_sign_meta.setDisplayName(Utilities.toColor("&c" + house_name + " Buy Sign"));
+//                    s_sign_meta.setDisplayName(Utilities.toColor("&c" + house_name + " Sell Sign"));
+//                    buy_sign.setItemMeta(b_sign_meta);
+//                    sell_sign.setItemMeta(s_sign_meta);
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rNow go out to the front of the house where the door is placed. Find two blocks on opposite sides of the door to place these signs."));
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rThe left side of the door will have the buy sign, the sell sign will be on the right."));
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are done with the two sign placements, type '&cREADY&r'"));
                 } else {
                     try {
                         sell_price = Integer.valueOf(message);
@@ -305,5 +314,19 @@ public class HouseEditor {
         this.l = loc;
     }
 
+    public int genChestNumber() {
+        this.chestNum = 0;
+        for (int x = houseAABB.getMinX(); x <= houseAABB.getMaxX(); x++) {
+            for (int y = houseAABB.getMinY(); y <= houseAABB.getMaxY(); y++) {
+                for (int z = houseAABB.getMinZ(); z <= houseAABB.getMaxZ(); z++) {
+                    Block b = Bukkit.getWorld(houseAABB.getWorldName()).getBlockAt(x, y, z);
+                    if (b.getType() == Material.CHEST) {
+                        this.chestNum++;
+                    }
+                }
+            }
+        }
+        return this.chestNum;
+    }
 
 }

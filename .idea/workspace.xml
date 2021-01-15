@@ -2,10 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4ae641d7-8cc9-49db-a8f3-8b948d53658b" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/MCRealestate-1.0-SNAPSHOT.jar" afterPath="$PROJECT_DIR$/target/MCRealestate-1.0-SNAPSHOT.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/bigshaneym/mcrealestate/housing/HouseEditor.class" afterPath="$PROJECT_DIR$/target/classes/com/bigshaneym/mcrealestate/housing/HouseEditor.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/bigshaneym/mcrealestate/housing/listeners/HouseEditorPlayerInteract.class" afterPath="$PROJECT_DIR$/target/classes/com/bigshaneym/mcrealestate/housing/listeners/HouseEditorPlayerInteract.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_api_1_16_4_R0_1_SNAPSHOT.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_api_1_16_4_R0_1_SNAPSHOT.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/Core.java" afterPath="$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/Core.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/housing/HouseEditor.java" afterPath="$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/housing/HouseEditor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/housing/listeners/HouseEditorPlayerInteract.java" afterPath="$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/housing/listeners/HouseEditorPlayerInteract.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/plugin.yml" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -32,17 +38,37 @@
       <file leaf-file-name="HouseEditor.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/housing/HouseEditor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2009">
-              <caret line="109" column="76" lean-forward="true" selection-start-line="109" selection-start-column="76" selection-end-line="109" selection-end-column="76" />
+            <state relative-caret-position="332">
+              <caret line="185" column="122" lean-forward="false" selection-start-line="185" selection-start-column="122" selection-end-line="185" selection-end-column="122" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#18454#18455#0" expanded="true" />
-                <element signature="e#18482#18483#0" expanded="true" />
-                <element signature="e#18530#18531#0" expanded="true" />
-                <element signature="e#18559#18560#0" expanded="true" />
-                <element signature="e#18607#18608#0" expanded="true" />
-                <element signature="e#18635#18636#0" expanded="true" />
+                <element signature="e#18988#18989#0" expanded="true" />
+                <element signature="e#19016#19017#0" expanded="true" />
+                <element signature="e#19064#19065#0" expanded="true" />
+                <element signature="e#19093#19094#0" expanded="true" />
+                <element signature="e#19141#19142#0" expanded="true" />
+                <element signature="e#19169#19170#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="plugin.yml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="17" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="21" column="27" lean-forward="false" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -50,8 +76,8 @@
       <file leaf-file-name="House.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/world/House.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+            <state relative-caret-position="57">
+              <caret line="27" column="5" lean-forward="false" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -98,7 +124,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/bigshaneym/mc_realestate/Core.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/world/WorldAABB.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/world/HouseBounds.java" />
@@ -107,13 +132,14 @@
         <option value="$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/housing/listeners/HouseEditorConnectionListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/housing/listeners/HouseEditorLeaveServerListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/commands/HouseCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/plugin.yml" />
         <option value="$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/housing/listeners/HouseEditorChatListener.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/housing/HousingTypes.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/housing/listeners/HouseEditorSignPlaceEvent.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/world/House.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/housing/HouseEditStages.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/Core.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/plugin.yml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/housing/listeners/HouseEditorPlayerInteract.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/housing/HouseEditor.java" />
       </list>
@@ -375,15 +401,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1610416622553</updated>
-      <workItem from="1610416626023" duration="23964000" />
+      <workItem from="1610416626023" duration="25896000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23964000" />
+    <option name="totallyTimeSpent" value="25896000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -397,7 +424,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.175" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.175" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296875" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -473,14 +500,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="40" lean-forward="false" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/io/FileManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -529,14 +548,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="41" lean-forward="false" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/housing/listeners/HouseEditorSignPlaceEvent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -544,14 +555,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/housing/HouseEditStages.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -563,16 +566,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/housing/listeners/HouseEditorPlayerInteract.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="130" lean-forward="true" selection-start-line="36" selection-start-column="130" selection-end-line="36" selection-end-column="130" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/housing/HouseSignUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -581,10 +574,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/housing/HouseEditStages.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="24" lean-forward="false" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="27" lean-forward="false" selection-start-line="21" selection-start-column="27" selection-end-line="21" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="17" lean-forward="false" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/housing/listeners/HouseEditorPlayerInteract.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="27" column="39" lean-forward="true" selection-start-line="27" selection-start-column="39" selection-end-line="27" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/world/House.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="5" lean-forward="true" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+        <state relative-caret-position="57">
+          <caret line="27" column="5" lean-forward="false" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -593,16 +620,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bigshaneym/mcrealestate/housing/HouseEditor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2009">
-          <caret line="109" column="76" lean-forward="true" selection-start-line="109" selection-start-column="76" selection-end-line="109" selection-end-column="76" />
+        <state relative-caret-position="332">
+          <caret line="185" column="122" lean-forward="false" selection-start-line="185" selection-start-column="122" selection-end-line="185" selection-end-column="122" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#18454#18455#0" expanded="true" />
-            <element signature="e#18482#18483#0" expanded="true" />
-            <element signature="e#18530#18531#0" expanded="true" />
-            <element signature="e#18559#18560#0" expanded="true" />
-            <element signature="e#18607#18608#0" expanded="true" />
-            <element signature="e#18635#18636#0" expanded="true" />
+            <element signature="e#18988#18989#0" expanded="true" />
+            <element signature="e#19016#19017#0" expanded="true" />
+            <element signature="e#19064#19065#0" expanded="true" />
+            <element signature="e#19093#19094#0" expanded="true" />
+            <element signature="e#19141#19142#0" expanded="true" />
+            <element signature="e#19169#19170#0" expanded="true" />
           </folding>
         </state>
       </provider>
