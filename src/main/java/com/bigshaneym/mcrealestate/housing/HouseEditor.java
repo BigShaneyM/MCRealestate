@@ -8,6 +8,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -29,10 +30,7 @@ public class HouseEditor {
     private int buy_price, sell_price;
     private int chestNum;
     private double price_val_decay;
-
-
-
-    public boolean buy_sign_placed, sell_sign_placed;
+    private Location teleport_loc;
 
     public HouseEditor() {
         this(HouseEditStages.START, 0.5);
@@ -116,7 +114,6 @@ public class HouseEditor {
         switch (stage) {
             case CHOOSE_HOUSE_BOUNDS:
                 if (message.equals("READY") && !(l == null || l0 == null)) {
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rSecond location recorded!"));
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rNow to create a name for this 'house' boundary. Please type in a name, only one word!"));
                     stage = HouseEditStages.SET_HOUSE_NAME;
                     player.getInventory().clear();
@@ -129,33 +126,6 @@ public class HouseEditor {
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rIf you need to exit the house editor, please type '&cEXIT&r'"));
                 }
                 break;
-            /**case CHOOSE_FIRST_COORDS:
-                if (message.equals("READY")) {
-                    this.l0 = player.getLocation();
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rFirst location recorded!"));
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rNow, choose the next highest corner opposite to the first corner in a diagonal. " +
-                            "Right click the block with the stick."));
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are have the position, please type in chat: '&cREADY&r'"));
-                    stage = HouseEditStages.CHOOSE_SECOND_COORDS;
-                } else {
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWelcome to the Housing Editor. To start, left click a block at the lowest corner of the house using the stick."));
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you have the position, please type in chat: '&cREADY&r'"));
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rIf you need to exit the house editor, please type '&cEXIT&r'"));
-                }
-                break;
-            case CHOOSE_SECOND_COORDS:
-                if (message.equals("READY")) {
-                    this.l = player.getLocation();
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rSecond location recorded!"));
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rNow to create a name for this 'house' boundary. Please type in a name, only one word!"));
-                    stage = HouseEditStages.SET_HOUSE_NAME;
-                    player.getInventory().clear();
-                } else {
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rChoose the next highest corner opposite to the first corner in a diagonal." +
-                            "Right click the block with the stick."));
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are have the position, please type in chat: '&cREADY&r'"));
-                }
-                break;*/
             case SET_HOUSE_NAME:
                 if (house_name == null && message.equals("READY")) {
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rCreate a name for this 'house' boundary. Please type in a name, only one word!"));
@@ -217,7 +187,7 @@ public class HouseEditor {
                     player.sendMessage(Utilities.toColor(toSend));
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are done with deciding a house type, please type in '&cREADY&r'"));
                 } else if (message.equals("READY")) {
-                    stage = HouseEditStages.SET_BUY_SIGNS;
+                    stage = HouseEditStages.SET_HOUSE_PRICE;
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rNow please enter a number for the price of the house to buy. Take into account the number of chests within the house too!"));
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are finished with a buying price, please type '&cREADY&r'"));
 
@@ -240,19 +210,20 @@ public class HouseEditor {
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&cInvalid buy price number! Please enter a valid integer!"));
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are finished with a buying price, please type '&cREADY&r'"));
                 } else if (message.equals("READY")) {
+                    sell_price = (int)(buy_price * price_val_decay);
                     stage = HouseEditStages.PLACE_DOOR_SIGNS;
                     player.getInventory().clear();
-                    ItemStack buy_sign = new ItemStack(Material.OAK_WALL_SIGN);
-                    ItemStack sell_sign = new ItemStack(Material.OAK_WALL_SIGN);
+                    ItemStack buy_sign = new ItemStack(Material.OAK_SIGN);
+                    ItemStack sell_sign = new ItemStack(Material.OAK_SIGN);
                     ItemMeta b_sign_meta = buy_sign.getItemMeta();
                     ItemMeta s_sign_meta = sell_sign.getItemMeta();
-                    b_sign_meta.setDisplayName(Utilities.toColor("&c" + house_name + " Buy Sign"));
-                    s_sign_meta.setDisplayName(Utilities.toColor("&c" + house_name + " Sell Sign"));
+                    b_sign_meta.setDisplayName(Utilities.toColor("&2Buy Sign"));
+                    s_sign_meta.setDisplayName(Utilities.toColor("&cSell Sign"));
                     buy_sign.setItemMeta(b_sign_meta);
                     sell_sign.setItemMeta(s_sign_meta);
                     player.getInventory().addItem(new ItemStack[]{buy_sign, sell_sign});
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rNow go out to the front of the house where the door is placed. " +
-                            "Find two blocks on opposite sides of the door to place these signs."));
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rOn the outside of the house, by each door, place the buy sign on the top left next to the door,\n " +
+                            "and the sell sign on the top right next to the door"));
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rThe left side of the door will have the buy sign, the sell sign will be on the right."));
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are done with the two sign placements, type '&cREADY&r'"));
                 } else {
@@ -270,9 +241,34 @@ public class HouseEditor {
                 }
                 break;
             case PLACE_DOOR_SIGNS:
+                if (message.equals("READY")) {
+                    player.getInventory().clear();
+                    stage = HouseEditStages.CHOOSE_TP_LOCATION;
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rNow, inside the house, choose a spot where the owner/guests can tp safely into the house."));
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are finished with choosing a teleport location, please type '&cREADY&r'"));
+                } else {
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are done with the two sign placements, type '&cREADY&r'"));
+                }
                 break;
             case CHOOSE_TP_LOCATION:
+                if (message.equals("READY")) {
+                    teleport_loc = player.getLocation();
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&r You have chosen the teleport location as " + Utilities.getLocationString(teleport_loc)));
+                    stage = HouseEditStages.FINISH;
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&r"));
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rYou have completed house creation! House is saved as " + house_name + "!"));
+
+                    new House(houseAABB, house_name, buy_price, price_val_decay, null, null, chestNum, houseType);
+
+                    player.setGameMode(GameMode.SURVIVAL);
+                    player.removePotionEffect(PotionEffectType.INVISIBILITY);
+                    removeHouseEditor(player.getName());
+                } else {
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rGo inside the house, choose a spot where the owner/guests can tp safely into the house."));
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are finished with choosing a teleport location, please type '&cREADY&r'"));
+                }
                 break;
+            case FINISH:
             default:
                 break;
         }
@@ -313,6 +309,32 @@ public class HouseEditor {
             }
         }
         return this.chestNum;
+    }
+
+    public Sign genSign(boolean isBuySign, Sign sign) {
+        if (isBuySign) {
+            String topLine;
+            switch (houseType) {
+                case MULTI_OWNER_RENTAL:
+                case SINGLE_OWNER_RENTAL:
+                    topLine = "Rent House";
+                    break;
+                default:
+                    topLine = "Buy House";
+                    break;
+            }
+            sign.setLine(0, Utilities.toColor("&2" + topLine));
+            sign.setLine(1, Utilities.toColor("&2$" + buy_price));
+            sign.setLine(2, Utilities.toColor("&2" + house_name));
+            sign.setLine(3, Utilities.toColor("&2Total Chests: " + chestNum));
+        } else {
+            sign.setLine(0, Utilities.toColor("&cSell House"));
+            sign.setLine(1, Utilities.toColor("&c$" + sell_price));
+            sign.setLine(2, Utilities.toColor("&c" + house_name));
+            sign.setLine(3, Utilities.toColor("&cTotal Chests: " + chestNum));
+        }
+        sign.update();
+        return sign;
     }
 
 }

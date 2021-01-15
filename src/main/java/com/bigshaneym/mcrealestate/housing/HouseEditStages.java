@@ -11,7 +11,6 @@ public enum HouseEditStages {
     PLACE_DOORS,
     PLACE_DOOR_SIGNS,
     SET_HOUSE_PRICE,
-    SET_BUY_SIGNS,
     FINISH
 
 }

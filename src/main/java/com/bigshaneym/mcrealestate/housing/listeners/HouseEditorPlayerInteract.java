@@ -31,12 +31,12 @@ public class HouseEditorPlayerInteract implements Listener {
                 switch (a) {
                     case LEFT_CLICK_BLOCK:
                         editor.setLocationOne(location);
-                        player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rFirst location set at " + getLocationString(location) + "!"));
+                        player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rFirst location set at " + Utilities.getLocationString(location) + "!"));
                         player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen both locations are set, type '&cREADY&r'"));
                         break;
                     case RIGHT_CLICK_BLOCK:
                         editor.setLocationTwo(location);
-                        player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rSecond location set at " + getLocationString(location) + "!"));
+                        player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rSecond location set at " + Utilities.getLocationString(location) + "!"));
                         player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen both locations are set, type '&cREADY&r'"));
                         break;
                 }
@@ -45,7 +45,5 @@ public class HouseEditorPlayerInteract implements Listener {
         }
     }
 
-    private String getLocationString(Location l) {
-        return "X:" + l.getBlockX() + " Y:" + l.getBlockY() + " Z:" + l.getBlockZ();
-    }
+
 }

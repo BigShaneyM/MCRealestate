@@ -2,6 +2,7 @@
   <dictionary name="Shane">
     <words>
       <w>coords</w>
+      <w>teleport</w>
     </words>
   </dictionary>
 </component>

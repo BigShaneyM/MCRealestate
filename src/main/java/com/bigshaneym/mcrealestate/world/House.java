@@ -3,19 +3,35 @@ package com.bigshaneym.mcrealestate.world;
 import com.bigshaneym.mcrealestate.housing.HousingTypes;
 import org.bukkit.Location;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class House {
 
+    private static Map<String, House> houseMap;
+
     private WorldAABB houseAABB;
     private String houseName;
-    private double listed_price;
+    private int listed_price;
+    private double value_dep;
     private String ownerUUID;
     private List<String> guestUUIDs;
     private int chest_storage_amount;
     private HousingTypes type = HousingTypes.NULL_TYPE;
 
+    public House(WorldAABB houseAABB, String houseName, int listed_price, double value_dep, String ownerUUID, List<String> guestUUIDs, int chest_storage_amount, HousingTypes type) {
+        this.houseAABB = houseAABB;
+        this.houseName = houseName;
+        this.listed_price = listed_price;
+        this.value_dep = value_dep;
+        this.ownerUUID = ownerUUID;
+        this.guestUUIDs = guestUUIDs;
+        this.chest_storage_amount = chest_storage_amount;
+        this.type = type;
 
+        houseMap.put(houseName, this);
+    }
 
     public boolean isLocationInBounds(Location toCheck) {
         if (!toCheck.getWorld().getName().equalsIgnoreCase(this.houseAABB.getWorldName()))
@@ -28,6 +44,45 @@ public class House {
             return false;
         return true;
     }
+
+    public void removeHouse() {
+        houseMap.remove(houseName);
+    }
+
+
+    public WorldAABB getHouseAABB() {
+        return houseAABB;
+    }
+
+    public String getHouseName() {
+        return houseName;
+    }
+
+    public int getListedPrice() {
+        return listed_price;
+    }
+
+    public double getValueDep() {
+        return value_dep;
+    }
+
+    public String getOwnerUUID() {
+        return ownerUUID;
+    }
+
+    public List<String> getGuestUUIDs() {
+        return guestUUIDs;
+    }
+
+    public int getChestStorageAmount() {
+        return chest_storage_amount;
+    }
+
+    public HousingTypes getType() {
+        return type;
+    }
+
+    /**STATIC METHODS HERE*/
 
     public static WorldAABB getAABBFromLocations(Location l0, Location l) {
         int minX = l0.getBlockX();
@@ -58,6 +113,19 @@ public class House {
         }
 
         return new WorldAABB(minX, minY, minZ, maxX, maxY, maxZ, l0.getWorld().getName());
+    }
+
+    public static Map<String, House> getHouseMap() {
+        return houseMap;
+    }
+
+    public static void createHouseMap() {
+        houseMap = new HashMap<String, House>();
+    }
+
+    public static void clearHouseMap() {
+        houseMap.clear();
+        houseMap = null;
     }
 
 }
