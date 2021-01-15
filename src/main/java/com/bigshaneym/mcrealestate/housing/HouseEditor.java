@@ -81,8 +81,10 @@ public class HouseEditor {
         addChatLineGap(player);
         addChatLineGap(player);
         if (stage == HouseEditStages.START) {
-            player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWelcome to the Housing Editor. To start, left click a block at the lowest corner of the house using the stick."));
+            player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWelcome to the Housing Editor. To start, left click the block at the lowest corner of the house using the stick."));
             player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you have the position, please type in chat: '&cREADY&r'"));
+            player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rAfter that, choose the next highest corner opposite to the first corner in a diagonal. " +
+                    "Right click the block with the stick."));
             player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rIf you need to exit the house editor, please type '&cEXIT&r'"));
             stage = HouseEditStages.CHOOSE_HOUSE_BOUNDS;
             player.setGameMode(GameMode.CREATIVE);
@@ -105,6 +107,18 @@ public class HouseEditor {
 
         switch (stage) {
             case CHOOSE_HOUSE_BOUNDS:
+                if (message.equals("READY") && !(l == null || l0 == null)) {
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rSecond location recorded!"));
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rNow to create a name for this 'house' boundary. Please type in a name, only one word!"));
+                    stage = HouseEditStages.SET_HOUSE_NAME;
+                    player.getInventory().clear();
+                } else {
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWelcome to the Housing Editor. To start, left click the block at the lowest corner of the house using the stick."));
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you have the position, please type in chat: '&cREADY&r'"));
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rAfter that, choose the next highest corner opposite to the first corner in a diagonal. " +
+                            "Right click the block with the stick."));
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rIf you need to exit the house editor, please type '&cEXIT&r'"));
+                }
                 break;
             /**case CHOOSE_FIRST_COORDS:
                 if (message.equals("READY")) {

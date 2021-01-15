@@ -4,6 +4,7 @@ import com.bigshaneym.mcrealestate.commands.HouseCommand;
 import com.bigshaneym.mcrealestate.housing.HouseEditor;
 import com.bigshaneym.mcrealestate.housing.listeners.HouseEditorChatListener;
 import com.bigshaneym.mcrealestate.housing.listeners.HouseEditorLeaveServerListener;
+import com.bigshaneym.mcrealestate.housing.listeners.HouseEditorPlayerInteract;
 import com.bigshaneym.mcrealestate.housing.listeners.HouseEditorSignPlaceEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -31,6 +32,7 @@ public class Core extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new HouseEditorChatListener(), this);
         this.getServer().getPluginManager().registerEvents(new HouseEditorLeaveServerListener(), this);
         this.getServer().getPluginManager().registerEvents(new HouseEditorSignPlaceEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new HouseEditorPlayerInteract(), this);
     }
 
     private void registerCommands() {
