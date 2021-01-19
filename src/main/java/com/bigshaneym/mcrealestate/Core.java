@@ -6,7 +6,7 @@ import com.bigshaneym.mcrealestate.housing.listeners.HouseEditorChatListener;
 import com.bigshaneym.mcrealestate.housing.listeners.HouseEditorLeaveServerListener;
 import com.bigshaneym.mcrealestate.housing.listeners.HouseEditorPlayerInteract;
 import com.bigshaneym.mcrealestate.housing.listeners.HouseEditorSignPlaceEvent;
-import com.bigshaneym.mcrealestate.world.House;
+import com.bigshaneym.mcrealestate.housing.House;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;

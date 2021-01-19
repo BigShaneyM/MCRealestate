@@ -2,10 +2,14 @@ package com.bigshaneym.mcrealestate.commands;
 
 import com.bigshaneym.mcrealestate.housing.HouseEditStages;
 import com.bigshaneym.mcrealestate.housing.HouseEditor;
+import com.bigshaneym.mcrealestate.util.ItemStackUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.CraftingInventory;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 public class HouseCommand implements CommandExecutor {
 
@@ -25,6 +29,24 @@ public class HouseCommand implements CommandExecutor {
                 } else if (a.equals("VIEW") && isAdmin) {
 
                 } else if (a.equals("ADD_OWNER")) {
+                    Player player = (Player)sender;
+                    /**ItemStack itemStack = player.getItemInHand();
+                    long current_0 = System.currentTimeMillis();
+                    String serializedStack = ItemStackUtils.getInstance().serializeItemStack(itemStack);
+                    System.out.println("ItemStack serialized: [" + serializedStack + "]");
+                    ItemStack itemStack1 = ItemStackUtils.getInstance().deserializeItemStack(serializedStack);
+                    if (itemStack1 != null) {
+                        player.getInventory().addItem(itemStack1);
+                        long deltaMS = System.currentTimeMillis() - current_0;
+                        System.out.println("Took this amount of time to serialize and deserialize itemStack " + deltaMS);
+
+                    }*/
+
+                    long current_0 = System.currentTimeMillis();
+                    Inventory inventory = ItemStackUtils.getInstance().loadInventory();
+                    player.openInventory(inventory);
+                    long deltaMS = System.currentTimeMillis() - current_0;
+                    System.out.println("Took this amount of time to deserialize inventory " + deltaMS);
 
                 } else if (a.equals("DEL_OWNER")) {
 

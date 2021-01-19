@@ -1,6 +1,5 @@
-package com.bigshaneym.mcrealestate.world;
+package com.bigshaneym.mcrealestate.housing;
 
-import com.bigshaneym.mcrealestate.housing.HousingTypes;
 import org.bukkit.Location;
 
 import java.util.HashMap;
@@ -14,17 +13,15 @@ public class House {
     private WorldAABB houseAABB;
     private String houseName;
     private int listed_price;
-    private double value_dep;
     private String ownerUUID;
     private List<String> guestUUIDs;
     private int chest_storage_amount;
     private HousingTypes type = HousingTypes.NULL_TYPE;
 
-    public House(WorldAABB houseAABB, String houseName, int listed_price, double value_dep, String ownerUUID, List<String> guestUUIDs, int chest_storage_amount, HousingTypes type) {
+    public House(WorldAABB houseAABB, String houseName, int listed_price, String ownerUUID, List<String> guestUUIDs, int chest_storage_amount, HousingTypes type) {
         this.houseAABB = houseAABB;
         this.houseName = houseName;
         this.listed_price = listed_price;
-        this.value_dep = value_dep;
         this.ownerUUID = ownerUUID;
         this.guestUUIDs = guestUUIDs;
         this.chest_storage_amount = chest_storage_amount;
@@ -60,10 +57,6 @@ public class House {
 
     public int getListedPrice() {
         return listed_price;
-    }
-
-    public double getValueDep() {
-        return value_dep;
     }
 
     public String getOwnerUUID() {

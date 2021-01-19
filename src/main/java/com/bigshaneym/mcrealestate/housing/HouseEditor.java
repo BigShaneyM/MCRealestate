@@ -1,8 +1,6 @@
 package com.bigshaneym.mcrealestate.housing;
 
-import com.bigshaneym.mcrealestate.Utilities;
-import com.bigshaneym.mcrealestate.world.House;
-import com.bigshaneym.mcrealestate.world.WorldAABB;
+import com.bigshaneym.mcrealestate.util.Utilities;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -29,16 +27,14 @@ public class HouseEditor {
     private HousingTypes houseType = HousingTypes.NULL_TYPE;
     private int buy_price, sell_price;
     private int chestNum;
-    private double price_val_decay;
     private Location teleport_loc;
 
     public HouseEditor() {
-        this(HouseEditStages.START, 0.5);
+        this(HouseEditStages.START);
     }
 
-    public HouseEditor(HouseEditStages stage, double price_value_decay) {
+    public HouseEditor(HouseEditStages stage) {
         this.stage = stage;
-        this.price_val_decay = price_value_decay;
         createMap();
     }
 
@@ -69,7 +65,7 @@ public class HouseEditor {
 
     public static void addPlayerEditor(Player player, HouseEditStages stage) {
      if (!isEditing(player.getName()))
-         editors_map.put(player.getName(), new HouseEditor(stage, 0.5));
+         editors_map.put(player.getName(), new HouseEditor(stage));
     }
 
     private void addChatLineGap(Player player) {
@@ -114,7 +110,7 @@ public class HouseEditor {
         switch (stage) {
             case CHOOSE_HOUSE_BOUNDS:
                 if (message.equals("READY") && !(l == null || l0 == null)) {
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rNow to create a name for this 'house' boundary. Please type in a name, only one word!"));
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rNow to create a name for this 'house' boundary. Please type in a name, only one word, keep it simple!"));
                     stage = HouseEditStages.SET_HOUSE_NAME;
                     player.getInventory().clear();
                     houseAABB = House.getAABBFromLocations(l0, l);
@@ -210,7 +206,7 @@ public class HouseEditor {
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&cInvalid buy price number! Please enter a valid integer!"));
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are finished with a buying price, please type '&cREADY&r'"));
                 } else if (message.equals("READY")) {
-                    sell_price = (int)(buy_price * price_val_decay);
+                    sell_price = (int)(buy_price * HouseConfigVars.getSellPriceValueDecay());
                     stage = HouseEditStages.PLACE_DOOR_SIGNS;
                     player.getInventory().clear();
                     ItemStack buy_sign = new ItemStack(Material.OAK_SIGN);
@@ -235,7 +231,7 @@ public class HouseEditor {
                         return;
                     }
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rYou have chosen the buying price of this house to be $" + buy_price));
-                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rThis makes the selling price to be $" + (int)(buy_price * price_val_decay)));
+                    player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rThis makes the selling price to be $" + (int)(buy_price * HouseConfigVars.getSellPriceValueDecay())));
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rIf this is wrong, please enter another valid integer!"));
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you are finished with a buying price, please type '&cREADY&r'"));
                 }
@@ -258,7 +254,7 @@ public class HouseEditor {
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&r"));
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rYou have completed house creation! House is saved as " + house_name + "!"));
 
-                    new House(houseAABB, house_name, buy_price, price_val_decay, null, null, chestNum, houseType);
+                    new House(houseAABB, house_name, buy_price,null, null, chestNum, houseType);
 
                     player.setGameMode(GameMode.SURVIVAL);
                     player.removePotionEffect(PotionEffectType.INVISIBILITY);

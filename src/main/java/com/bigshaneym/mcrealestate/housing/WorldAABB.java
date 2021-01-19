@@ -1,4 +1,4 @@
-package com.bigshaneym.mcrealestate.world;
+package com.bigshaneym.mcrealestate.housing;
 
 public class WorldAABB {
 
