@@ -7,17 +7,23 @@ import com.bigshaneym.mcrealestate.housing.listeners.HouseEditorLeaveServerListe
 import com.bigshaneym.mcrealestate.housing.listeners.HouseEditorPlayerInteract;
 import com.bigshaneym.mcrealestate.housing.listeners.HouseEditorSignPlaceEvent;
 import com.bigshaneym.mcrealestate.housing.House;
+import com.bigshaneym.mcrealestate.io.ConfigManager;
+import com.bigshaneym.mcrealestate.io.HouseIOManager;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Core extends JavaPlugin {
 
+    private static ConfigManager configManager;
+    private static HouseIOManager houseIOManager;
+
     public void onEnable() {
         registerCommands();
         registerListeners();
         HouseEditor.createMap();
         House.createHouseMap();
+        registerFiles();
         System.out.println("MCRealestate enabled");
     }
 
@@ -40,5 +46,18 @@ public class Core extends JavaPlugin {
 
     private void registerCommands() {
         this.getCommand("house").setExecutor(new HouseCommand());
+    }
+
+    private void registerFiles() {
+        configManager = new ConfigManager();
+        houseIOManager = new HouseIOManager();
+    }
+
+    public static ConfigManager getConfigManager() {
+        return configManager;
+    }
+
+    public static HouseIOManager getHouseIOManager() {
+        return houseIOManager;
     }
 }

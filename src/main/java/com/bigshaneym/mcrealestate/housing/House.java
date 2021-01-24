@@ -3,8 +3,8 @@ package com.bigshaneym.mcrealestate.housing;
 import org.bukkit.Location;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class House {
 
@@ -13,19 +13,21 @@ public class House {
     private WorldAABB houseAABB;
     private String houseName;
     private int listed_price;
-    private String ownerUUID;
-    private List<String> guestUUIDs;
+    private Set<String> ownerUUIDs;
+    private Map<String, Set<String>> guestUUIDs;
     private int chest_storage_amount;
     private HousingTypes type = HousingTypes.NULL_TYPE;
+    private Location teleport;
 
-    public House(WorldAABB houseAABB, String houseName, int listed_price, String ownerUUID, List<String> guestUUIDs, int chest_storage_amount, HousingTypes type) {
+    public House(WorldAABB houseAABB, String houseName, int listed_price, Set<String> ownerUUIDs, Map<String, Set<String>> guestUUIDs, int chest_storage_amount, HousingTypes type, Location teleport) {
         this.houseAABB = houseAABB;
         this.houseName = houseName;
         this.listed_price = listed_price;
-        this.ownerUUID = ownerUUID;
+        this.ownerUUIDs = ownerUUIDs;
         this.guestUUIDs = guestUUIDs;
         this.chest_storage_amount = chest_storage_amount;
         this.type = type;
+        this.teleport = teleport;
 
         houseMap.put(houseName, this);
     }
@@ -59,11 +61,11 @@ public class House {
         return listed_price;
     }
 
-    public String getOwnerUUID() {
-        return ownerUUID;
+    public Set<String> getOwnerUUIDs() {
+        return this.ownerUUIDs;
     }
 
-    public List<String> getGuestUUIDs() {
+    public Map<String, Set<String>> getGuestUUIDs() {
         return guestUUIDs;
     }
 
@@ -73,6 +75,10 @@ public class House {
 
     public HousingTypes getType() {
         return type;
+    }
+
+    public Location getTeleport() {
+        return teleport;
     }
 
     /**STATIC METHODS HERE*/
@@ -114,6 +120,10 @@ public class House {
 
     public static void createHouseMap() {
         houseMap = new HashMap<String, House>();
+    }
+
+    public static void setHouseMap(Map<String, House> houseMap) {
+        House.houseMap = houseMap;
     }
 
     public static void clearHouseMap() {

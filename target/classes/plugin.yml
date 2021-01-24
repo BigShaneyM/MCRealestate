@@ -5,3 +5,4 @@ api-version: 1.16
 commands:
   house:
     description: /house <param> <param1>
+depend: [Vault]

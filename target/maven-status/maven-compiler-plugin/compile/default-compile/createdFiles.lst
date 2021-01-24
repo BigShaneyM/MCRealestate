@@ -1,4 +1,5 @@
 com\bigshaneym\mcrealestate\housing\HousingTypes.class
+com\bigshaneym\mcrealestate\housing\listeners\InventoryEventListeners.class
 com\bigshaneym\mcrealestate\util\Utilities.class
 com\bigshaneym\mcrealestate\housing\HouseEditStages.class
 com\bigshaneym\mcrealestate\housing\HouseConfigVars.class

@@ -1,16 +1,14 @@
 package com.bigshaneym.mcrealestate.housing.listeners;
 
-import com.bigshaneym.mcrealestate.util.ItemStackUtils;
-import com.bigshaneym.mcrealestate.util.Utilities;
 import com.bigshaneym.mcrealestate.housing.HouseEditStages;
 import com.bigshaneym.mcrealestate.housing.HouseEditor;
+import com.bigshaneym.mcrealestate.util.Utilities;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class HouseEditorPlayerInteract implements Listener {
@@ -46,17 +44,5 @@ public class HouseEditorPlayerInteract implements Listener {
             }
         }
     }
-
-
-    @EventHandler
-    public void onClose(InventoryCloseEvent event) {
-        if (event.getInventory() == ItemStackUtils.getInstance().getInventory()) {
-            long current_0 = System.currentTimeMillis();
-            ItemStackUtils.getInstance().saveInventory(event.getInventory());
-            long deltaMS = System.currentTimeMillis() - current_0;
-            System.out.println("Took this amount of time to serialize inventory " + deltaMS);
-        }
-    }
-
 
 }

@@ -1,5 +1,6 @@
 package com.bigshaneym.mcrealestate.housing;
 
+import com.bigshaneym.mcrealestate.Core;
 import com.bigshaneym.mcrealestate.util.Utilities;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -28,10 +29,6 @@ public class HouseEditor {
     private int buy_price, sell_price;
     private int chestNum;
     private Location teleport_loc;
-
-    public HouseEditor() {
-        this(HouseEditStages.START);
-    }
 
     public HouseEditor(HouseEditStages stage) {
         this.stage = stage;
@@ -84,10 +81,10 @@ public class HouseEditor {
         addChatLineGap(player);
         if (stage == HouseEditStages.START) {
             player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWelcome to the Housing Editor. To start, left click the block at the lowest corner of the house using the stick."));
-            player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you have the position, please type in chat: '&cREADY&r'"));
             player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rAfter that, choose the next highest corner opposite to the first corner in a diagonal. " +
                     "Right click the block with the stick."));
             player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rIf you need to exit the house editor, please type '&cEXIT&r'"));
+            player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rWhen you have both positions, please type in chat: '&cREADY&r'"));
             stage = HouseEditStages.CHOOSE_HOUSE_BOUNDS;
             player.setGameMode(GameMode.CREATIVE);
             player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 1000000, 10));
@@ -132,7 +129,7 @@ public class HouseEditor {
                     stage = HouseEditStages.CHEST_PLACEMENT;
                     ItemStack house_chest = new ItemStack(Material.CHEST);
                     ItemMeta chest_meta = house_chest.getItemMeta();
-                    chest_meta.setDisplayName(Utilities.toColor("&c" + house_name + " Storage"));
+                    chest_meta.setDisplayName(Utilities.toColor(house_name + " Chest"));
                     house_chest.setItemMeta(chest_meta);
                     player.getInventory().setItem(0, house_chest);
 
@@ -253,9 +250,9 @@ public class HouseEditor {
                     stage = HouseEditStages.FINISH;
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&r"));
                     player.sendMessage(Utilities.toColor("&2[MCRealEstate]:&rYou have completed house creation! House is saved as " + house_name + "!"));
-
-                    new House(houseAABB, house_name, buy_price,null, null, chestNum, houseType);
-
+                    House house = new House(houseAABB, house_name, buy_price,null, null, chestNum, houseType, teleport_loc);
+                    House.getHouseMap().put(house_name, house);
+                    Core.getHouseIOManager().saveHouseInfo(house);
                     player.setGameMode(GameMode.SURVIVAL);
                     player.removePotionEffect(PotionEffectType.INVISIBILITY);
                     removeHouseEditor(player.getName());
@@ -319,15 +316,15 @@ public class HouseEditor {
                     topLine = "Buy House";
                     break;
             }
-            sign.setLine(0, Utilities.toColor("&2" + topLine));
-            sign.setLine(1, Utilities.toColor("&2$" + buy_price));
-            sign.setLine(2, Utilities.toColor("&2" + house_name));
-            sign.setLine(3, Utilities.toColor("&2Total Chests: " + chestNum));
+            sign.setLine(0, Utilities.toColor("[&2" + topLine + "&r]"));
+            sign.setLine(1, "$" + buy_price);
+            sign.setLine(2, Utilities.toColor("&6" + house_name));
+            sign.setLine(3, "Total Chests: " + chestNum);
         } else {
-            sign.setLine(0, Utilities.toColor("&cSell House"));
-            sign.setLine(1, Utilities.toColor("&c$" + sell_price));
-            sign.setLine(2, Utilities.toColor("&c" + house_name));
-            sign.setLine(3, Utilities.toColor("&cTotal Chests: " + chestNum));
+            sign.setLine(0, Utilities.toColor("[&cSell House&r]"));
+            sign.setLine(1, "$" + sell_price);
+            sign.setLine(2, Utilities.toColor("&6" + house_name));
+            sign.setLine(3, "Total Chests: " + chestNum);
         }
         sign.update();
         return sign;

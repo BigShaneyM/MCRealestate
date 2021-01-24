@@ -43,4 +43,21 @@ public class WorldAABB {
     public String getWorldName() {
         return worldName;
     }
+
+    @Override
+    public String toString() {
+        return minX + "," + minY + "," + minZ + "," + maxX + "," + maxY + "," + maxZ + "," + worldName;
+    }
+
+    public static WorldAABB getFromString(String data) {
+        String[] loc = data.split(",");
+        int a = Integer.valueOf(loc[0]);
+        int b = Integer.valueOf(loc[1]);
+        int c = Integer.valueOf(loc[2]);
+        int d = Integer.valueOf(loc[3]);
+        int e = Integer.valueOf(loc[4]);
+        int f = Integer.valueOf(loc[5]);
+
+        return new WorldAABB(a, b, c, d, e, f, loc[6]);
+    }
 }

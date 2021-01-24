@@ -1,7 +1,6 @@
 package com.bigshaneym.mcrealestate.io;
 
 import com.bigshaneym.mcrealestate.Core;
-import com.bigshaneym.mcrealestate.housing.House;
 import com.bigshaneym.mcrealestate.housing.HouseConfigVars;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -24,7 +23,7 @@ public class ConfigManager extends FileManager {
         cfg.set("HouseConfiguration.SQL.max_wait_response_seconds", 2);
     }
 
-    public void loadConfig() {
+    public void loadConfigDefaults() {
         FileConfiguration cfg = this.getFileConfig();
         double decay_price = cfg.getDouble("HouseConfiguration.sell_price_at_value_percentage");
         HouseConfigVars.setSellPriceValueDecay(decay_price);
